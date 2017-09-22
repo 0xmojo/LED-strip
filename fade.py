@@ -58,7 +58,10 @@ def choose_color():
     b = normalize(list[2])
 
     set_color(r,g,b)
-    
+
+def fade(list):
+    print "Fading"
+    print list
 
 def network_mode():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -71,12 +74,17 @@ def network_mode():
         data = conn.recv(1024)
         if not data:
             break
+       
         list = data.split(",")
+        print list
 
-        r = normalize(list[0])
-        g = normalize(list[1])
-        b = normalize(list[2])
-        set_color(r,g,b)
+        if len(list) > 3:
+            fade(list)
+        else: 
+            r = normalize(list[0])
+            g = normalize(list[1])
+            b = normalize(list[2])
+            set_color(r,g,b)
 
     conn.close()
 
